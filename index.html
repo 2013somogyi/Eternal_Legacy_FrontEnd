@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f3">
+  <title>Eternal Legacy | Gravatas Premium</title>
+  <style>
+    :root {
+      font-family: "DM Sans", Arial, sans-serif;
+      color: #1a1a1a;
+      background: #f8f8f8;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --gold: #c5a059;
+      --graphite: #1a1a1a;
+      --muted: #777;
+      --line: #ececec;
+      --paper: #fff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; min-height: 100vh; overflow-x: hidden; }
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .site-header { position: sticky; z-index: 5; top: 0; height: 76px; padding: 0 max(5vw, calc((100vw - 1200px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid #eee; background: rgba(255,255,255,.96); box-shadow: 0 2px 14px #0000000a; backdrop-filter: blur(10px); }
+    .brand { font-family: "Playfair Display", Georgia, serif; font-size: 19px; font-weight: 700; letter-spacing: .08em; white-space: nowrap; }
+    .brand span { color: var(--gold); }
+    .contact-link { font-size: 13px; color: #555; transition: color .18s; }
+    .contact-link:hover, .back-link:hover { color: #98762d; }
+    .cart-link { display: flex; align-items: center; gap: 9px; font-size: 13px; transition: color .18s; }
+    .cart-link:hover { color: #98762d; }
+    .cart-link > span:first-child { font-size: 21px; transform: rotate(180deg); }
+    .cart-link b { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: var(--gold); color: white; font-size: 11px; }
+    .page-shell { width: min(1200px, 90vw); min-height: calc(100vh - 76px); margin: 0 auto; padding: 38px 0 78px; }
+    .page-shell.narrow { width: min(1100px, 90vw); }
+    .hero { position: relative; min-height: clamp(300px, 42vw, 490px); padding: clamp(30px, 6vw, 76px); display: grid; align-items: center; overflow: hidden; background: linear-gradient(115deg, #171717 0%, #252525 60%, #332b1e 100%); color: white; }
+    .hero::before, .hero::after { position: absolute; content: ""; pointer-events: none; }
+    .hero::before { inset: 0; opacity: .22; background-image: linear-gradient(#ffffff0a 1px, transparent 1px), linear-gradient(90deg, #ffffff0a 1px, transparent 1px); background-size: 28px 28px; }
+    .hero::after { width: 340px; height: 340px; right: 5%; top: 50%; transform: translateY(-50%); border-radius: 50%; background: var(--gold); filter: blur(125px); opacity: .18; }
+    .hero-content { position: relative; z-index: 1; max-width: 690px; }
+    .hero .eyebrow { color: var(--gold); }
+    .hero h1 { max-width: 680px; margin: 17px 0; font-size: clamp(38px, 6vw, 68px); line-height: 1.08; }
+    .hero-copy { max-width: 550px; margin: 0; color: #d0d0d0; font-size: clamp(14px, 1.6vw, 17px); line-height: 1.8; }
+    .hero-offer { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 27px; padding: 15px 18px; width: fit-content; border-left: 3px solid var(--gold); background: #ffffff12; }
+    .hero-offer span { color: #ddd; font-size: 12px; }
+    .hero-offer strong { color: white; font-family: "Playfair Display", Georgia, serif; font-size: 18px; }
+    .hero-offer strong + strong { color: #e2c47e; }
+    .hero-button { margin-top: 23px; border-color: var(--gold); background: var(--gold); color: #1a1a1a; }
+    .hero-button:hover:not(:disabled) { border-color: #d4b36f; background: #d4b36f; }
+    h1, h2 { font-family: "Playfair Display", Georgia, serif; font-weight: 500; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 15px; margin: 49px 0 23px; }
+    .section-heading h1, .admin-section h1 { margin: 8px 0 0; font-size: clamp(25px, 4vw, 36px); }
+    .eyebrow { color: #a98337; font-size: 10px; font-weight: 700; letter-spacing: .18em; }
+    .product-count, .item-id { color: var(--muted); font-size: 11px; }
+    .product-count { padding: 8px 12px; border: 1px solid var(--line); border-radius: 20px; white-space: nowrap; }
+    .product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .product-card { overflow: hidden; background: var(--paper); border: 1px solid #ededed; border-radius: 5px; box-shadow: 0 4px 16px #00000008; transition: transform .22s, box-shadow .22s; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px #00000012; }
+    .product-image { position: relative; aspect-ratio: 4 / 4.4; overflow: hidden; background: #eeece6; }
+    .product-image > img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s; }
+    .product-card:hover .product-image > img { transform: scale(1.045); }
+    .zoom-lens { position: absolute; z-index: 2; display: none; overflow: visible; border: 2px solid white; border-radius: 50%; background: white; box-shadow: 0 3px 14px #0006, 0 0 0 1px #c5a059; pointer-events: none; }
+    .zoom-lens::after { position: absolute; right: -10px; bottom: -5px; width: 26px; height: 7px; border: 1px solid white; border-radius: 5px; background: var(--gold); box-shadow: 0 2px 5px #0004; content: ""; transform: rotate(45deg); transform-origin: left center; }
+    .zoom-lens img { position: absolute; max-width: none; object-fit: cover; transform: none !important; }
+    @media (hover: hover) and (pointer: fine) {
+      .product-image { cursor: crosshair; }
+      .zoom-lens.is-visible { display: block; }
+    }
+    .product-info { min-height: 96px; padding: 15px 17px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .product-info p { margin: 6px 0 0; font-size: 18px; font-weight: 700; }
+    .primary, .secondary { min-height: 44px; padding: 0 17px; border: 1px solid var(--graphite); border-radius: 3px; background: var(--graphite); color: white; font-size: 12px; font-weight: 600; transition: background .18s, border-color .18s, color .18s; }
+    .primary:hover:not(:disabled) { border-color: #343434; background: #343434; }
+    .hero .hero-button { border-color: var(--gold); background: var(--gold); color: #1a1a1a; }
+    .hero .hero-button:hover:not(:disabled) { border-color: #d4b36f; background: #d4b36f; }
+    .secondary { background: white; color: var(--graphite); border-color: var(--line); }
+    .secondary:hover:not(:disabled) { border-color: var(--gold); }
+    .danger { border-color: #9f312d; background: #9f312d; }
+    .danger:hover:not(:disabled) { background: #7e2421; }
+    .notice { padding: 16px 18px; background: white; border: 1px solid var(--line); color: var(--muted); }
+    .error { color: #9f312d; }
+    .success { color: #326844; }
+    .success-toast { position: fixed; z-index: 20; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); width: min(360px, calc(100vw - 32px)); padding: 15px 18px; display: flex; align-items: center; gap: 11px; border: 1px solid #1f6b3b; background: #267a46; color: white; box-shadow: 0 8px 24px #143c2580; font-size: 14px; font-weight: 600; animation: toast-enter .2s ease-out; }
+    .success-toast-icon { width: 22px; height: 22px; flex: 0 0 22px; display: grid; place-items: center; border: 1px solid #ffffffaa; border-radius: 50%; font-size: 13px; }
+    @keyframes toast-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .back-link { display: inline-block; margin: 4px 0 10px; color: var(--muted); font-size: 13px; }
+    .cart-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 350px); align-items: start; gap: 26px; }
+    .cart-items { display: grid; gap: 13px; }
+    .cart-item { min-height: 142px; padding: 15px; display: flex; align-items: center; gap: 18px; background: white; border: 1px solid var(--line); border-radius: 5px; box-shadow: 0 4px 16px #00000008; }
+    .cart-item > img { width: 94px; height: 112px; flex: 0 0 auto; object-fit: cover; background: #eeece6; border-radius: 3px; }
+    .cart-item-copy { flex: 1; display: grid; gap: 9px; }
+    .cart-item-copy strong { font-size: 18px; }
+    .cart-remove { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid #f0e7e5; border-radius: 3px; background: white; color: #96554e; font-size: 11px; transition: background .18s; }
+    .cart-remove:hover { background: #fcf4f3; }
+    .icon-button { border: 0; background: transparent; color: var(--muted); font-size: 26px; line-height: 1; }
+    .delete-button { width: 38px; height: 38px; }
+    .cart-summary { position: sticky; top: 98px; width: 100%; margin: 0; padding: 23px; background: white; border: 1px solid var(--line); border-radius: 5px; box-shadow: 0 8px 28px #0000000a; }
+    .cart-summary-heading { display: grid; gap: 8px; padding-bottom: 17px; border-bottom: 1px solid var(--line); }
+    .cart-summary-heading strong { font-family: "Playfair Display", Georgia, serif; font-size: 21px; font-weight: 500; }
+    .cart-summary-row, .cart-summary-total { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; }
+    .cart-summary-row { padding: 16px 0; color: #555; }
+    .cart-summary-total { padding: 16px 0; border-top: 1px solid var(--line); font-weight: 600; }
+    .cart-summary-total strong { font-family: "Playfair Display", Georgia, serif; font-size: 25px; }
+    .cart-summary small { display: block; margin: 0 0 18px; color: var(--muted); line-height: 1.65; }
+    .cart-summary button { width: 100%; }
+    .cart-summary .primary { border-color: var(--gold); background: var(--gold); color: #1a1a1a; }
+    .cart-summary .primary:hover:not(:disabled) { border-color: #d4b36f; background: #d4b36f; }
+    .cart-continue { display: block; margin-top: 15px; color: #6a5a3b; text-align: center; font-size: 12px; }
+    .cart-continue:hover { text-decoration: underline; }
+    .empty-state { min-height: 300px; display: grid; align-content: center; justify-items: center; gap: 15px; padding: 35px 20px; border: 1px dashed #d8d2c7; border-radius: 5px; background: #fff; color: var(--muted); text-align: center; }
+    .button-link { display: inline-flex; align-items: center; justify-content: center; }
+    .site-footer { padding: 48px 5vw 22px; background: #1a1a1a; color: white; }
+    .footer-inner { width: min(1200px, 100%); margin: 0 auto; }
+    .footer-main { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(150px, 1fr)); gap: 40px; padding-bottom: 34px; }
+    .footer-brand { display: inline-block; margin-bottom: 13px; color: white; font-family: "Playfair Display", Georgia, serif; font-size: 21px; font-weight: 700; letter-spacing: .08em; }
+    .footer-brand span { color: var(--gold); }
+    .footer-copy { max-width: 340px; margin: 0; color: #aaa; font-size: 13px; line-height: 1.8; }
+    .footer-column h2 { margin: 0 0 14px; color: white; font-family: "Playfair Display", Georgia, serif; font-size: 17px; }
+    .footer-links { display: grid; justify-items: start; gap: 11px; color: #aaa; font-size: 13px; }
+    .footer-links a { transition: color .18s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 15px; padding-top: 19px; border-top: 1px solid #ffffff1c; color: #898989; font-size: 11px; }
+    .modal-backdrop { position: fixed; z-index: 10; inset: 0; padding: 18px; display: grid; place-items: center; background: rgba(25,24,21,.58); }
+    .modal { width: min(100%, 470px); max-height: min(90vh, 760px); overflow: auto; padding: 24px; background: #fff; box-shadow: 0 18px 60px #0003; outline: none; }
+    .modal-heading { display: flex; align-items: start; justify-content: space-between; gap: 12px; margin-bottom: 19px; }
+    .modal-heading h2 { margin: 0; font-size: 24px; }
+    .modal-heading .icon-button { font-size: 24px; }
+    .modal-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: 9px; margin-top: 19px; }
+    .form-stack { display: grid; gap: 15px; }
+    .form-stack label, .upload-form label { display: grid; gap: 7px; font-size: 12px; font-weight: 600; }
+    .form-stack input, .form-stack textarea, .form-stack select, .upload-form input[type="file"] { width: 100%; min-height: 42px; padding: 10px; border: 1px solid #d9d6cd; border-radius: 0; background: white; color: var(--graphite); }
+    .form-stack textarea { resize: vertical; }
+    .form-stack input:read-only { background: #f8f7f3; color: var(--muted); }
+    .admin-page { min-height: 100vh; }
+    .admin-login-backdrop { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(25,24,21,.5); }
+    .admin-login-backdrop .modal { margin: 16px; }
+    .admin-topbar { position: sticky; z-index: 4; top: 0; min-height: 76px; padding: 12px 5vw; display: flex; align-items: center; justify-content: space-between; gap: 15px; border-bottom: 1px solid var(--line); background: #f8f7f3; }
+    .admin-topbar .brand { display: flex; align-items: center; gap: 4px; }
+    .admin-topbar .brand small { margin-left: 8px; color: var(--muted); font-size: 9px; letter-spacing: .12em; }
+    .admin-top-actions { display: flex; align-items: center; justify-content: end; gap: 12px; }
+    .pending-label { color: #8a6820; font-size: 11px; }
+    .link-btn { padding: 8px 0; border: 0; background: none; color: #655f50; font-size: 12px; }
+    .admin-layout { width: min(1280px, 92vw); margin: 0 auto; display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 38px; padding: 34px 0 70px; }
+    .admin-menu { display: grid; align-content: start; gap: 5px; }
+    .admin-menu button { padding: 13px; border: 0; border-left: 2px solid transparent; background: transparent; text-align: left; color: var(--muted); font-size: 13px; }
+    .admin-menu button.active { border-left-color: var(--gold); background: white; color: var(--graphite); }
+    .admin-section h1 { margin-bottom: 23px; }
+    .admin-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .admin-filters { margin-bottom: 18px; padding: 16px; display: grid; gap: 14px; background: white; border: 1px solid var(--line); }
+    [hidden] { display: none !important; }
+    .admin-search { display: grid; gap: 7px; color: var(--graphite); font-size: 12px; font-weight: 600; }
+    .admin-search input { width: 100%; min-height: 42px; padding: 10px; border: 1px solid #d9d6cd; border-radius: 0; background: white; color: var(--graphite); }
+    .admin-status-filters { display: flex; flex-wrap: wrap; gap: 14px; }
+    .admin-status-filters label { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; cursor: pointer; }
+    .admin-status-filters input { accent-color: var(--gold); }
+    .admin-filter-count { margin: 0; color: var(--muted); font-size: 11px; }
+    .admin-product { background: white; border: 1px solid var(--line); }
+    .admin-product.modified { outline: 2px solid var(--gold); }
+    .admin-product > img { width: 100%; aspect-ratio: 1 / 1.05; display: block; object-fit: cover; background: #eeece6; }
+    .admin-product-info { padding: 12px; display: flex; align-items: center; flex-wrap: wrap; gap: 9px; }
+    .admin-product-info .item-id { flex: 1 0 45%; }
+    .admin-product-info button { width: 100%; }
+    .status-badge { padding: 5px 7px; border-radius: 30px; font-size: 10px; }
+    .status-badge.disponivel { background: #e4efe7; color: #356747; }
+    .status-badge.reservado { background: #f7e8df; color: #94572e; }
+    .upload-form { width: min(100%, 520px); padding: 20px; display: grid; gap: 14px; background: white; border: 1px solid var(--line); }
+    .upload-form small { color: var(--muted); line-height: 1.5; }
+    .upload-form input[type="file"] { font-size: 12px; }
+    .admin-preview { width: min(100%, 280px); max-height: 340px; object-fit: contain; background: #f0eee8; }
+    @media (max-width: 760px) {
+      .cart-layout { grid-template-columns: 1fr; }
+      .cart-summary { position: static; }
+      .footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 22px; }
+      .footer-brand-block { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .site-header { height: 70px; padding: 0 4vw; gap: 10px; }
+      .brand { font-size: 16px; letter-spacing: .06em; }
+      .contact-link, .cart-link { font-size: 14px; }
+      .cart-link { gap: 6px; }
+      .cart-link > span:first-child { display: none; }
+      .cart-link b { width: 25px; height: 25px; font-size: 13px; }
+      .page-shell { min-height: calc(100vh - 70px); padding-top: 22px; }
+      .hero { min-height: 370px; padding: 30px 22px; }
+      .hero h1 { font-size: clamp(40px, 11vw, 52px); }
+      .hero-copy { font-size: 16px; line-height: 1.75; }
+      .hero .eyebrow { font-size: 12px; line-height: 1.6; }
+      .hero-offer { gap: 9px 14px; padding: 13px; }
+      .hero-offer span { flex-basis: 100%; font-size: 14px; }
+      .hero-offer strong { font-size: 18px; }
+      .hero-button { min-height: 50px; font-size: 15px; }
+      .section-heading { margin-top: 32px; }
+      .section-heading h1 { max-width: 260px; font-size: 30px; line-height: 1.2; }
+      .eyebrow { font-size: 12px; line-height: 1.5; }
+      .product-count { padding: 8px 10px; font-size: 13px; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .product-info { min-height: 124px; padding: 12px 10px; display: grid; align-content: space-between; gap: 12px; }
+      .product-info p { font-size: 17px; }
+      .product-info .primary { min-height: 48px; padding: 7px 8px; font-size: 13px; line-height: 1.35; }
+      .item-id { font-size: 12px; }
+      .back-link { font-size: 15px; }
+      .cart-item { min-height: 132px; gap: 12px; padding: 11px; }
+      .cart-item > img { width: 82px; height: 104px; }
+      .cart-item-copy { gap: 8px; }
+      .cart-item-copy strong { font-size: 18px; }
+      .cart-item-note { font-size: 14px; }
+      .cart-remove { padding: 8px; font-size: 0; }
+      .cart-remove span { display: inline; font-size: 24px; line-height: 1; }
+      .cart-summary { padding: 21px; }
+      .cart-summary-heading strong { font-size: 23px; }
+      .cart-summary-row, .cart-summary-total { font-size: 15px; }
+      .cart-summary-total strong { font-size: 28px; }
+      .cart-summary small { font-size: 14px; }
+      .cart-summary .primary, .cart-continue { min-height: 50px; font-size: 15px; }
+      .cart-continue { display: grid; place-items: center; }
+      .empty-state { font-size: 16px; }
+      .site-footer { padding: 38px 5vw 20px; }
+      .footer-main { gap: 27px 18px; }
+      .footer-brand { font-size: 23px; }
+      .footer-copy { font-size: 15px; }
+      .footer-column h2 { font-size: 19px; }
+      .footer-links { gap: 13px; font-size: 15px; }
+      .footer-bottom { flex-direction: column; font-size: 13px; line-height: 1.6; }
+      .modal { padding: 22px; }
+      .modal-heading h2 { font-size: 27px; }
+      .form-stack { gap: 17px; }
+      .form-stack label { gap: 8px; font-size: 15px; }
+      .form-stack input, .form-stack textarea, .form-stack select { min-height: 50px; padding: 11px 12px; font-size: 16px; }
+      .form-stack .primary { min-height: 50px; font-size: 15px; }
+      .admin-topbar { align-items: start; padding: 13px 4vw; }
+      .admin-topbar .brand { margin-top: 10px; }
+      .admin-top-actions { gap: 8px; flex-wrap: wrap; }
+      .pending-label { flex-basis: 100%; text-align: right; }
+      .save-button { min-height: 37px; padding: 0 10px; font-size: 10px; }
+      .admin-layout { width: 92vw; grid-template-columns: 1fr; gap: 20px; padding-top: 20px; }
+      .admin-menu { display: flex; }
+      .admin-menu button { flex: 1; padding: 11px 6px; border-left: 0; border-bottom: 2px solid transparent; text-align: center; font-size: 11px; }
+      .admin-menu button.active { border-bottom-color: var(--gold); }
+      .admin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .modal { padding: 20px; }
+    }
+    @media (max-width: 360px) {
+      .site-header { padding-right: 3vw; padding-left: 3vw; gap: 6px; }
+      .brand { font-size: 14px; }
+      .contact-link, .cart-link { font-size: 12px; }
+      .cart-link { gap: 4px; }
+      .cart-link b { width: 22px; height: 22px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    "use strict";
+
+    // Altere estas constantes caso a API ou o WhatsApp da loja mudem.
+    const API_BASE_URL = "https://eternallegacy-production.up.railway.app/api";
+    const WHATSAPP_NUMBER = "5511987378659";
+    const CART_KEY = "eternal-legacy-cart";
+    const TOKEN_KEY = "adminToken";
+    const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+    const MAX_COMPRESSED_BYTES = 1024 * 1024;
+    const MAX_IMAGE_DIMENSION = 1600;
+    const app = document.getElementById("app");
+    const state = {
+      route: routeFromHash(),
+      cart: readCart(),
+      products: [],
+      productsLoading: false,
+      productsError: "",
+      toastMessage: "",
+      modal: null,
+      adminAuthenticated: false,
+      adminChecking: false,
+      adminCheckedToken: "",
+      adminSection: "produtos",
+      adminProducts: [],
+      adminProductSearch: "",
+      adminStatusFilters: { disponivel: true, reservado: true },
+      adminLoading: false,
+      adminError: "",
+      adminMessage: "",
+      adminBusy: false,
+      pendingStatuses: {},
+      selectedFile: null,
+      previewUrl: "",
+      uploadResult: null
+    };
+    let memoryToken = "";
+    let requestVersion = 0;
+    let toastTimer = null;
+
+    function routeFromHash() {
+      const path = location.hash.replace(/^#/, "").split("?")[0] || "/";
+      return path.startsWith("/") ? path : `/${path}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[character]);
+    }
+
+    function readCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        return Array.isArray(saved)
+          ? saved.filter((item) => item && Number.isSafeInteger(item.id) && item.id > 0)
+          : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(CART_KEY, JSON.stringify(state.cart));
+      } catch {
+        // A sessão sem storage continua funcional até a página ser fechada.
+      }
+    }
+
+    function readToken() {
+      try {
+        return sessionStorage.getItem(TOKEN_KEY) || memoryToken;
+      } catch {
+        return memoryToken;
+      }
+    }
+
+    function writeToken(token) {
+      memoryToken = token;
+      try {
+        sessionStorage.setItem(TOKEN_KEY, token);
+      } catch {
+        // Mantém o login em memória se o navegador bloquear sessionStorage.
+      }
+    }
+
+    function clearToken() {
+      memoryToken = "";
+      try {
+        sessionStorage.removeItem(TOKEN_KEY);
+      } catch {
+        // Não há token persistido para limpar quando storage está bloqueado.
+      }
+    }
+
+    function tokenIsValid(token) {
+      try {
+        const encoded = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+        const payload = JSON.parse(atob(encoded));
+        return Number.isFinite(payload.exp) && payload.exp * 1000 > Date.now();
+      } catch {
+        return false;
+      }
+    }
+
+    async function apiRequest(path, options = {}) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      const headers = new Headers(options.headers || {});
+      const token = readToken();
+      if (token) headers.set("Authorization", `Bearer ${token}`);
+      try {
+        const response = await fetch(`${API_BASE_URL}${path}`, {
+          ...options,
+          headers,
+          signal: controller.signal
+        });
+        const contentType = response.headers.get("content-type") || "";
+        const data = contentType.includes("application/json") ? await response.json() : null;
+        if (!response.ok) {
+          const error = new Error(data?.mensagem || "Não foi possível concluir a solicitação.");
+          error.status = response.status;
+          error.data = data;
+          throw error;
+        }
+        return data;
+      } catch (error) {
+        if (error.name === "AbortError") {
+          throw new Error("A API demorou para responder. Verifique sua conexão e tente novamente.");
+        }
+        if (error instanceof TypeError) {
+          throw new Error("Não foi possível conectar à loja. Verifique se a API está em execução.");
+        }
+        throw error;
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    const formatPrice = (value) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    const calculateTotal = (quantity) => Math.floor(quantity / 5) * 100 + (quantity % 5) * 25;
+    const phoneDigits = (value) => value.replace(/\D/g, "").slice(0, 11);
+
+    function formatPhone(value) {
+      const digits = phoneDigits(value);
+      if (digits.length <= 2) return digits ? `(${digits}` : "";
+      if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+      const splitAt = digits.length === 11 ? 7 : 6;
+      return `(${digits.slice(0, 2)}) ${digits.slice(2, splitAt)}-${digits.slice(splitAt)}`;
+    }
+
+    function header() {
+      return `<header class="site-header">
+        <a class="brand" href="#/">ETERNAL <span>LEGACY</span></a>
+        <a class="contact-link" href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noreferrer">Fale conosco</a>
+        <a class="cart-link" href="#/carrinho" aria-label="Carrinho com ${state.cart.length} itens">
+          <span aria-hidden="true">♧</span><span>Carrinho</span><b>${state.cart.length}</b>
+        </a>
+      </header>`;
+    }
+
+    function modal(title, content, { closable = true, className = "" } = {}) {
+      return `<div class="modal-backdrop ${className}" data-backdrop>
+        <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+          <div class="modal-heading">
+            <h2 id="modal-title">${escapeHtml(title)}</h2>
+            ${closable ? '<button type="button" class="icon-button" data-action="close-modal" aria-label="Fechar janela">×</button>' : ""}
+          </div>
+          ${content}
+        </section>
+      </div>`;
+    }
+
+    function footer() {
+      return `<footer class="site-footer">
+        <div class="footer-inner">
+          <div class="footer-main">
+            <div class="footer-brand-block">
+              <a class="footer-brand" href="#/">ETERNAL <span>LEGACY</span></a>
+              <p class="footer-copy">Gravatas únicas para marcar presença em cada ocasião. Escolha sua peça e fale com a nossa equipe pelo WhatsApp.</p>
+            </div>
+            <div class="footer-column">
+              <h2>A loja</h2>
+              <div class="footer-links">
+                <a href="#/">Início da loja</a>
+                <a href="#/carrinho">Meu carrinho</a>
+              </div>
+            </div>
+            <div class="footer-column">
+              <h2>Atendimento</h2>
+              <div class="footer-links">
+                <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noreferrer">Fale conosco pelo WhatsApp</a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <span>© ${new Date().getFullYear()} Eternal Legacy. Todos os direitos reservados.</span>
+            <span> em cada detalhe.</span>
+          </div>
+        </div>
+      </footer>`;
+    }
+
+    function renderStore() {
+      const cartIds = new Set(state.cart.map(({ id }) => id));
+      const productCards = state.products.map((product) => `<article class="product-card">
+        <div class="product-image"><img src="${escapeHtml(product.imagem)}" alt="Gravata única ${product.id}" loading="lazy"></div>
+        <div class="product-info">
+          <div><span class="item-id">PEÇA #${product.id}</span><p>${formatPrice(25)}</p></div>
+          <button class="primary" data-action="add-cart" data-id="${product.id}" ${cartIds.has(product.id) ? "disabled" : ""}>
+            ${cartIds.has(product.id) ? "No carrinho" : "Adicionar ao carrinho"}
+          </button>
+        </div>
+      </article>`).join("");
+      app.innerHTML = `${header()}
+        <main class="page-shell">
+          <section class="hero" aria-label="Apresentação da loja">
+            <div class="hero-content">
+              <span class="eyebrow">ETERNAL LEGACY · PEÇAS ÚNICAS</span>
+              <h1>Elegância que se revela nos detalhes</h1>
+              <p class="hero-copy">Encontre uma gravata que combina com a sua ocasião. Cada peça disponível é única.</p>
+              <div class="hero-offer" aria-label="Condição especial de preço">
+                <span>Condição especial</span>
+                <strong>1 gravata R$ 25,00</strong>
+                <strong>5 gravatas R$ 100,00</strong>
+              </div>
+              <button class="primary hero-button" data-action="scroll-collection">Explorar coleção</button>
+            </div>
+          </section>
+          <section id="colecao" aria-labelledby="collection-title">
+            <div class="section-heading">
+              <div><span class="eyebrow">A SELEÇÃO</span><h1 id="collection-title">Encontre a sua próxima gravata</h1></div>
+              <span class="product-count">${state.products.length} disponíveis</span>
+            </div>
+          ${state.productsLoading ? '<p class="notice">Carregando gravatas…</p>' : ""}
+          ${state.productsError ? `<p class="error notice" role="alert">${escapeHtml(state.productsError)}</p>` : ""}
+          ${!state.productsLoading && !state.productsError && state.products.length === 0 ? '<p class="notice">Nenhuma gravata disponível no momento. Volte em breve.</p>' : ""}
+          <div class="product-grid">${productCards}</div>
+          </section>
+        </main>${footer()}${state.toastMessage ? `<div class="success-toast" role="status" aria-live="polite"><span class="success-toast-icon" aria-hidden="true">✓</span>${escapeHtml(state.toastMessage)}</div>` : ""}${state.modal?.type === "checkout" ? checkoutModal() : ""}`;
+    }
+
+    function checkoutModal() {
+      const checkout = state.modal;
+      const address = checkout.endereco || {};
+      return modal("Dados para a reserva", `<form class="form-stack" id="checkout-form">
+        <label>Nome completo<input name="nome" autofocus required maxlength="120" value="${escapeHtml(checkout.nome || "")}"></label>
+        <label>Telefone<input name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" required value="${escapeHtml(checkout.telefone || "")}"></label>
+        <label>CEP<input name="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required maxlength="9" value="${escapeHtml(checkout.cep || "")}" aria-describedby="cep-message"></label>
+        <p id="cep-message" class="${checkout.cepError ? "error" : ""}" role="${checkout.cepError ? "alert" : "status"}" aria-live="polite">${escapeHtml(checkout.cepError || (checkout.cepLoading ? "Consultando CEP…" : "Informe o CEP para preencher o endereço."))}</p>
+        <label>Logradouro<input name="logradouro" readonly value="${escapeHtml(address.logradouro || "")}"></label>
+        <label>Bairro<input name="bairro" readonly value="${escapeHtml(address.bairro || "")}"></label>
+        <label>Cidade<input name="cidade" readonly value="${escapeHtml(address.cidade || "")}"></label>
+        <label>UF<input name="uf" readonly maxlength="2" value="${escapeHtml(address.uf || "")}"></label>
+        <label>Número<input name="numero" required maxlength="30" value="${escapeHtml(checkout.numero || address.numero || "")}"></label>
+        <label>Complemento<input name="complemento" maxlength="150" value="${escapeHtml(checkout.complemento || address.complemento || "")}"></label>
+        ${checkout.error ? `<p class="error" role="alert">${escapeHtml(checkout.error)}</p>` : ""}
+        <button class="primary" type="submit" ${checkoutPodeEnviar(checkout) ? "" : "disabled"}>${checkout.busy ? "Reservando…" : "Enviar pelo WhatsApp"}</button>
+      </form>`, { closable: !checkout.busy });
+    }
+
+    function checkoutPodeEnviar(checkout) {
+      if (!checkout || checkout.busy || checkout.cepLoading) return false;
+      const nome = String(checkout.nome || "").trim();
+      const telefone = phoneDigits(String(checkout.telefone || ""));
+      const cep = String(checkout.cep || "").replace(/\D/g, "");
+      const numero = String(checkout.numero || "").trim();
+      const address = checkout.endereco;
+      return nome.length > 0 &&
+        telefone.length >= 10 && telefone.length <= 11 && telefone[0] !== "0" &&
+        cep.length === 8 && address?.cep === cep &&
+        Boolean(address.cidade?.trim()) && /^[A-Z]{2}$/.test(address.uf || "") &&
+        numero.length > 0;
+    }
+
+    function atualizarBotaoCheckout() {
+      const button = app.querySelector("#checkout-form button[type='submit']");
+      if (button) button.disabled = !checkoutPodeEnviar(state.modal);
+    }
+
+    function renderCart() {
+      const total = calculateTotal(state.cart.length);
+      const items = state.cart.map((item) => `<article class="cart-item">
+        <img src="${escapeHtml(item.imagem)}" alt="Gravata ${item.id}">
+        <div class="cart-item-copy"><span class="item-id">PEÇA ÚNICA #${item.id}</span><strong>${formatPrice(25)}</strong><span class="cart-item-note">Valor por peça</span></div>
+        <button class="cart-remove" data-action="remove-cart" data-id="${item.id}" aria-label="Remover gravata ${item.id}"><span aria-hidden="true">×</span> Remover</button>
+      </article>`).join("");
+      app.innerHTML = `${header()}
+        <main class="page-shell narrow">
+          <a class="back-link" href="#/">← Continuar comprando</a>
+          <div class="section-heading"><div><span class="eyebrow">SUA SELEÇÃO</span><h1>Carrinho</h1></div><span class="product-count">${state.cart.length} ${state.cart.length === 1 ? "item" : "itens"}</span></div>
+          <section class="cart-layout" aria-label="Conteúdo do carrinho">
+            ${state.cart.length === 0 ? `<div class="empty-state"><p>Seu carrinho está vazio.</p><a class="primary button-link" href="#/">Explorar gravatas</a></div>` : `
+              <div class="cart-items">${items}</div>
+              <aside class="cart-summary">
+                <div class="cart-summary-heading"><span class="eyebrow">RESUMO DO PEDIDO</span><strong>Detalhes da reserva</strong></div>
+                <div class="cart-summary-row"><span>${state.cart.length} ${state.cart.length === 1 ? "peça selecionada" : "peças selecionadas"}</span><span>${formatPrice(state.cart.length * 25)}</span></div>
+                <div class="cart-summary-total"><span>Total da reserva</span><strong>${formatPrice(total)}</strong></div>
+                <small>A cada grupo de 5 gravatas, o valor é R$ 100,00. O pagamento é combinado pelo WhatsApp.</small>
+                <button class="primary" data-action="checkout">Continuar para reserva</button>
+                <a class="cart-continue" href="#/">Continuar escolhendo</a>
+              </aside>`}
+          </section>
+        </main>${footer()}${state.modal?.type === "checkout" ? checkoutModal() : ""}`;
+    }
+
+    function loginPage() {
+      const login = state.modal?.type === "login" ? state.modal : {};
+      return `<main class="admin-page">
+        <a class="back-link" href="#/">← Voltar para a loja</a>
+        <div class="admin-login-backdrop">
+          ${modal(login.error ? "Acesso negado" : "Acesso do administrador", `<form class="form-stack" id="login-form">
+            <label>E-mail<input name="email" type="email" required autocomplete="username" value="${escapeHtml(login.email || "")}"></label>
+            <label>Senha<input name="senha" type="password" required autocomplete="current-password"></label>
+            ${login.error ? `<p class="error" role="alert">${escapeHtml(login.error)}</p>` : ""}
+            <button class="primary" ${login.busy ? "disabled" : ""}>${login.busy ? "Validando…" : "Entrar"}</button>
+          </form>`, { closable: false })}
+        </div>
+      </main>`;
+    }
+
+    function adminPage() {
+      if (state.adminChecking) return '<main class="admin-page"><p class="notice">Validando sessão…</p></main>';
+      if (!state.adminAuthenticated) return loginPage();
+
+      const pendingCount = Object.keys(state.pendingStatuses).length;
+      const products = state.adminProducts.map((product) => {
+        const status = state.pendingStatuses[product.id] || product.status;
+        const statusLabel = status === "disponivel" ? "Disponível" : "Reservado";
+        return `<article class="admin-product ${state.pendingStatuses[product.id] ? "modified" : ""}" data-product-id="${product.id}" data-product-status="${status}">
+          <img src="${escapeHtml(product.imagem)}" alt="Gravata ${product.id}">
+          <div class="admin-product-info">
+            <span class="item-id">PEÇA #${product.id}</span>
+            <span class="status-badge ${status}">${statusLabel}</span>
+            <button class="secondary" data-action="change-status" data-id="${product.id}">Alterar status</button>
+            <button class="danger primary" data-action="delete-product" data-id="${product.id}">Excluir produto</button>
+          </div>
+        </article>`;
+      }).join("");
+      let content;
+      if (state.adminSection === "adicionar") {
+        content = `<section class="admin-section">
+          <span class="eyebrow">CATÁLOGO</span><h1>Adicionar gravata</h1>
+          <form class="upload-form" id="upload-form">
+            <label>Imagem da peça <input name="imagem" type="file" accept="image/png,image/jpeg,image/webp"></label>
+            <small>PNG, JPG ou WEBP · até 5 MB. A imagem será redimensionada antes do envio.</small>
+            ${state.previewUrl ? `<img class="admin-preview" src="${state.previewUrl}" alt="Prévia da gravata selecionada">` : ""}
+            <button class="primary" ${state.adminBusy || !state.selectedFile ? "disabled" : ""}>${state.adminBusy ? "Enviando…" : "Adicionar produto"}</button>
+          </form>
+        </section>`;
+      } else {
+        content = `<section class="admin-section">
+          <span class="eyebrow">INVENTÁRIO</span><h1>Todos os produtos</h1>
+          ${state.adminError ? `<p class="error notice" role="alert">${escapeHtml(state.adminError)}</p>` : ""}
+          ${state.adminLoading ? '<p class="notice">Carregando produtos…</p>' : state.adminProducts.length === 0 ? '<p class="notice">Nenhum produto cadastrado.</p>' : `
+            <div class="admin-filters">
+              <label class="admin-search" for="admin-product-search">Pesquisar pelo ID
+                <input id="admin-product-search" type="search" inputmode="numeric" placeholder="Ex.: 123" value="${escapeHtml(state.adminProductSearch)}">
+              </label>
+              <div class="admin-status-filters" aria-label="Filtrar produtos por status">
+                <label><input type="checkbox" data-status-filter="disponivel" ${state.adminStatusFilters.disponivel ? "checked" : ""}> Disponível</label>
+                <label><input type="checkbox" data-status-filter="reservado" ${state.adminStatusFilters.reservado ? "checked" : ""}> Reservado</label>
+              </div>
+              <p class="admin-filter-count" aria-live="polite"></p>
+            </div>
+            <div class="admin-grid">${products}</div>
+            <p class="notice admin-no-filter-results" hidden>Nenhum produto corresponde à pesquisa e aos filtros selecionados.</p>`}
+        </section>`;
+      }
+
+      return `<main class="admin-page">
+        <header class="admin-topbar">
+          <a class="brand" href="#/">ETERNAL <span>LEGACY</span><small>ADMIN</small></a>
+          <div class="admin-top-actions">
+            ${pendingCount ? `<span class="pending-label">${pendingCount} alteração(ões) pendente(s)</span><button class="primary save-button" data-action="save-statuses" ${state.adminBusy ? "disabled" : ""}>${state.adminBusy ? "Salvando…" : "Salvar alterações"}</button>` : ""}
+            <button class="link-btn" data-action="logout">Sair</button>
+          </div>
+        </header>
+        <div class="admin-layout">
+          <aside class="admin-menu" aria-label="Menu administrativo">
+            <button class="${state.adminSection === "produtos" ? "active" : ""}" data-action="admin-section" data-section="produtos">Exibir produtos</button>
+            <button class="${state.adminSection === "adicionar" ? "active" : ""}" data-action="admin-section" data-section="adicionar">Adicionar produtos</button>
+          </aside>
+          <section class="admin-content">
+            ${state.adminMessage ? `<p class="success notice" role="status">${escapeHtml(state.adminMessage)}</p>` : ""}
+            ${content}
+          </section>
+        </div>
+        ${adminModal()}
+      </main>`;
+    }
+
+    function adminModal() {
+      if (state.modal?.type === "welcome") {
+        return modal("Bem-vindo", '<p>Você entrou no painel administrativo da loja.</p><button class="primary" data-action="close-modal">Continuar</button>');
+      }
+      if (state.modal?.type === "status") {
+        const product = state.modal.product;
+        const selected = state.modal.selected;
+        return modal(`Alterar status da peça #${product.id}`, `<div class="form-stack">
+          <label>Novo status<select id="new-status">
+            <option value="disponivel" ${selected === "disponivel" ? "selected" : ""}>Disponível</option>
+            <option value="reservado" ${selected === "reservado" ? "selected" : ""}>Reservado</option>
+          </select></label>
+          <div class="modal-actions"><button class="secondary" data-action="close-modal">Cancelar</button><button class="primary" data-action="apply-status">Aplicar alteração</button></div>
+        </div>`);
+      }
+      if (state.modal?.type === "delete-product") {
+        const { product, busy, error } = state.modal;
+        return modal("Excluir produto", `<p>Tem certeza de que deseja excluir a gravata #${product.id}? Esta ação remove o produto e sua imagem do banco de dados e não pode ser desfeita.</p>
+          ${error ? `<p class="error" role="alert">${escapeHtml(error)}</p>` : ""}
+          <div class="modal-actions">
+            <button class="secondary" data-action="close-modal" ${busy ? "disabled" : ""}>Cancelar</button>
+            <button class="primary danger" data-action="confirm-delete" ${busy ? "disabled" : ""}>${busy ? "Excluindo…" : "Excluir permanentemente"}</button>
+          </div>`, { closable: !busy });
+      }
+      if (state.modal?.type === "upload-result") {
+        return modal(state.modal.title, `<p>${escapeHtml(state.modal.message)}</p><button class="primary" data-action="close-modal">Fechar</button>`);
+      }
+      return "";
+    }
+
+    function render() {
+      state.route = routeFromHash();
+      if (state.route === "/") renderStore();
+      else if (state.route === "/carrinho") renderCart();
+      else app.innerHTML = '<main class="empty-state"><h1>Página não encontrada</h1><a href="#/">Voltar à loja</a></main>';
+
+      applyAdminProductFilters();
+
+      const dialog = app.querySelector('[role="dialog"]');
+      if (dialog) {
+        dialog.focus();
+        const autofocus = dialog.querySelector("[autofocus]");
+        if (autofocus) autofocus.focus();
+      }
+    }
+
+    function applyAdminProductFilters() {
+      const grid = app.querySelector(".admin-grid");
+      if (!grid) return;
+
+      const search = state.adminProductSearch.trim();
+      const cards = [...grid.querySelectorAll(".admin-product")];
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const matchesId = card.dataset.productId.includes(search);
+        const matchesStatus = state.adminStatusFilters[card.dataset.productStatus];
+        card.hidden = !matchesId || !matchesStatus;
+        if (!card.hidden) visibleCount += 1;
+      });
+
+      const count = app.querySelector(".admin-filter-count");
+      if (count) count.textContent = visibleCount === 1 ? "1 produto exibido" : `${visibleCount} produtos exibidos`;
+      const emptyState = app.querySelector(".admin-no-filter-results");
+      if (emptyState) emptyState.hidden = visibleCount > 0;
+    }
+
+    async function loadStoreProducts() {
+      const version = ++requestVersion;
+      state.productsLoading = true;
+      state.productsError = "";
+      render();
+      try {
+        const data = await apiRequest("/produtos?status=disponivel");
+        if (version !== requestVersion || routeFromHash() !== "/") return;
+        state.products = data.dados || [];
+      } catch (error) {
+        if (version !== requestVersion || routeFromHash() !== "/") return;
+        state.productsError = error.message;
+      } finally {
+        if (version === requestVersion && routeFromHash() === "/") {
+          state.productsLoading = false;
+          render();
+        }
+      }
+    }
+
+    async function loadAdminProducts() {
+      state.adminLoading = true;
+      state.adminError = "";
+      render();
+      try {
+        const data = await apiRequest("/produtos");
+        state.adminProducts = data.dados || [];
+      } catch (error) {
+        if (error.status === 401) {
+          logout();
+          return;
+        }
+        state.adminError = error.message;
+      } finally {
+        state.adminLoading = false;
+        if (routeFromHash() === "/admin" && state.adminAuthenticated) render();
+      }
+    }
+
+    async function renderAdmin() {
+      render();
+      if (state.adminChecking || state.adminCheckedToken === readToken()) return;
+
+      const token = readToken();
+      state.adminCheckedToken = token;
+      if (!token || !tokenIsValid(token)) {
+        clearToken();
+        state.adminAuthenticated = false;
+        render();
+        return;
+      }
+
+      state.adminChecking = true;
+      render();
+      try {
+        await apiRequest("/auth/me");
+        if (routeFromHash() !== "/admin") return;
+        state.adminAuthenticated = true;
+        await loadAdminProducts();
+      } catch {
+        clearToken();
+        state.adminAuthenticated = false;
+      } finally {
+        state.adminChecking = false;
+        if (routeFromHash() === "/admin") render();
+      }
+    }
+
+    function openRoute() {
+      const previousRoute = state.route;
+      state.route = routeFromHash();
+      state.modal = null;
+      if (previousRoute === "/admin" && state.route !== "/admin" && Object.keys(state.pendingStatuses).length) {
+        state.pendingStatuses = {};
+      }
+      render();
+      if (state.route === "/" && previousRoute !== "/") loadStoreProducts();
+    }
+
+    function logout(confirmChanges = true) {
+      if (confirmChanges && Object.keys(state.pendingStatuses).length
+        && !window.confirm("Há alterações não salvas. Deseja sair mesmo assim?")) return;
+      clearToken();
+      state.adminAuthenticated = false;
+      state.adminCheckedToken = "";
+      state.adminProducts = [];
+      state.pendingStatuses = {};
+      state.adminError = "";
+      state.adminMessage = "";
+      state.modal = null;
+      render();
+    }
+
+    function addToCart(id) {
+      const product = state.products.find((item) => item.id === id);
+      if (!product || state.cart.some((item) => item.id === id)) return;
+      state.cart.push(product);
+      saveCart();
+      state.toastMessage = "Adicionado com sucesso";
+      render();
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        state.toastMessage = "";
+        toastTimer = null;
+        if (routeFromHash() === "/") render();
+      }, 2800);
+    }
+
+    function removeFromCart(id) {
+      state.cart = state.cart.filter((item) => item.id !== id);
+      saveCart();
+      render();
+    }
+
+    async function submitCheckout(form) {
+      const values = new FormData(form);
+      const name = String(values.get("nome") || "").trim();
+      const phone = String(values.get("telefone") || "");
+      const cep = String(values.get("cep") || "").replace(/\D/g, "");
+      const numero = String(values.get("numero") || "").trim();
+      const complemento = String(values.get("complemento") || "").trim();
+      const address = { ...state.modal.endereco, cep, numero, complemento };
+      const digits = phoneDigits(phone);
+      if (!form.reportValidity()) return;
+      state.modal = { ...state.modal, type: "checkout", nome: name, telefone: phone, numero, complemento, endereco: address, error: "", busy: false };
+      if (!name || !numero) {
+        state.modal.error = "Preencha seu nome e o número do endereço.";
+        render();
+        return;
+      }
+      if (digits.length < 10 || digits.length > 11 || digits[0] === "0") {
+        state.modal.error = "Informe um telefone brasileiro válido com DDD.";
+        render();
+        return;
+      }
+      if (cep.length !== 8 || !address.cidade || !address.uf) {
+        state.modal.error = "Informe um CEP válido e aguarde o preenchimento do endereço.";
+        render();
+        return;
+      }
+      if (!WHATSAPP_NUMBER) {
+        state.modal.error = "O WhatsApp da loja ainda não foi configurado.";
+        render();
+        return;
+      }
+
+      state.modal.busy = true;
+      render();
+      try {
+        await apiRequest("/produtos/reservar", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ids: state.cart.map(({ id }) => id), nome: name, telefone: phone, endereco: address })
+        });
+        const itemLines = state.cart.map(({ id }) => `• Gravata #${id} — R$ 25,00`).join("\n");
+        const addressLines = [
+          `CEP: ${address.cep.replace(/^(\d{5})(\d{3})$/, "$1-$2")}`,
+          address.logradouro,
+          `Número: ${address.numero}`,
+          address.bairro,
+          `${address.cidade} - ${address.uf}`,
+          address.complemento ? `Complemento: ${address.complemento}` : ""
+        ].filter(Boolean);
+        const message = [
+          "Olá! Gostaria de confirmar minha reserva:",
+          `Nome: ${name}`,
+          `Telefone: ${phone}`,
+          "Endereço de entrega:",
+          ...addressLines,
+          "Gravatas:",
+          itemLines,
+          `Total: ${formatPrice(calculateTotal(state.cart.length))}`
+        ].join("\n");
+        state.cart = [];
+        saveCart();
+        location.assign(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`);
+      } catch (error) {
+        state.modal.busy = false;
+        const unavailableIds = error.data?.dados?.idsIndisponiveis;
+        if (error.status === 409 && Array.isArray(unavailableIds)) {
+          const unavailable = new Set(unavailableIds);
+          state.cart = state.cart.filter((item) => !unavailable.has(item.id));
+          saveCart();
+          state.modal.error = `As gravatas ${unavailableIds.map((id) => `#${id}`).join(", ")} não estão mais disponíveis e foram removidas do carrinho.`;
+        } else {
+          state.modal.error = error.message;
+        }
+        render();
+      }
+    }
+
+    async function consultarCep(cep) {
+      const checkout = state.modal;
+      if (!checkout || checkout.type !== "checkout") return;
+
+      checkout.cepLoading = true;
+      checkout.cepError = "";
+      checkout.endereco = null;
+      const status = app.querySelector("#cep-message");
+      const submitButton = app.querySelector("#checkout-form button[type='submit'], #checkout-form button:not([type])");
+      const requestId = (checkout.cepRequestId || 0) + 1;
+      checkout.cepRequestId = requestId;
+      if (status) {
+        status.className = "";
+        status.setAttribute("role", "status");
+        status.textContent = "Consultando CEP…";
+      }
+      if (submitButton) submitButton.disabled = true;
+
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`, {
+          signal: AbortSignal.timeout(10_000)
+        });
+        if (!response.ok) throw new Error("Não foi possível consultar o CEP. Tente novamente.");
+        const data = await response.json();
+        if (state.modal !== checkout || checkout.cepRequestId !== requestId || checkout.cep.replace(/\D/g, "") !== cep) return;
+        if (data.erro) throw new Error("CEP não encontrado. Confira os números e tente novamente.");
+
+        checkout.endereco = {
+          cep: String(data.cep || "").replace(/\D/g, ""),
+          logradouro: String(data.logradouro || ""),
+          bairro: String(data.bairro || ""),
+          cidade: String(data.localidade || ""),
+          uf: String(data.uf || "").toUpperCase(),
+          complemento: checkout.complemento || ""
+        };
+        if (!checkout.endereco.cep || !checkout.endereco.cidade || !checkout.endereco.uf) {
+          checkout.endereco = null;
+          throw new Error("A consulta não retornou um endereço completo para este CEP.");
+        }
+        checkout.cepError = "";
+        if (status) {
+          status.className = "success";
+          status.setAttribute("role", "status");
+          status.textContent = "Endereço preenchido pelo ViaCEP.";
+        }
+        for (const field of ["logradouro", "bairro", "cidade", "uf"]) {
+          const input = app.querySelector(`[name="${field}"]`);
+          if (input) input.value = checkout.endereco[field];
+        }
+        atualizarBotaoCheckout();
+      } catch (error) {
+        if (state.modal !== checkout || checkout.cepRequestId !== requestId || checkout.cep.replace(/\D/g, "") !== cep) return;
+        checkout.endereco = null;
+        checkout.cepError = error.name === "TimeoutError" || error.name === "AbortError"
+          ? "A consulta do CEP demorou para responder. Tente novamente."
+          : error instanceof TypeError
+            ? "Não foi possível conectar ao ViaCEP. Verifique sua conexão e tente novamente."
+            : error.message;
+        if (status) {
+          status.className = "error";
+          status.setAttribute("role", "alert");
+          status.textContent = checkout.cepError;
+        }
+      } finally {
+        if (state.modal === checkout && checkout.cepRequestId === requestId && checkout.cep.replace(/\D/g, "") === cep) {
+          checkout.cepLoading = false;
+          atualizarBotaoCheckout();
+        }
+      }
+    }
+
+    function openStatusModal(id) {
+      const product = state.adminProducts.find((item) => item.id === id);
+      if (!product) return;
+      const current = state.pendingStatuses[id] || product.status;
+      state.modal = {
+        type: "status",
+        product,
+        selected: current === "disponivel" ? "reservado" : "disponivel"
+      };
+      render();
+    }
+
+    async function saveStatuses() {
+      const items = Object.entries(state.pendingStatuses).map(([id, status]) => ({ id: Number(id), status }));
+      if (!items.length) return;
+      state.adminBusy = true;
+      state.adminError = "";
+      render();
+      try {
+        await apiRequest("/produtos/status", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(items)
+        });
+        state.pendingStatuses = {};
+        state.adminMessage = "As alterações de status foram salvas.";
+        await loadAdminProducts();
+      } catch (error) {
+        if (error.status === 401) {
+          logout(false);
+          return;
+        }
+        state.adminError = error.message;
+      } finally {
+        state.adminBusy = false;
+        if (routeFromHash() === "/admin") render();
+      }
+    }
+
+    async function deleteProduct() {
+      if (state.modal?.type !== "delete-product" || state.modal.busy) return;
+      const { product } = state.modal;
+      state.modal.busy = true;
+      state.modal.error = "";
+      render();
+      try {
+        await apiRequest(`/produtos/${product.id}`, { method: "PUT" });
+        state.adminProducts = state.adminProducts.filter((item) => item.id !== product.id);
+        delete state.pendingStatuses[product.id];
+        state.cart = state.cart.filter((item) => item.id !== product.id);
+        saveCart();
+        state.adminMessage = `Produto #${product.id} excluído.`;
+        state.modal = null;
+      } catch (error) {
+        if (error.status === 401) {
+          logout(false);
+          return;
+        }
+        state.modal.busy = false;
+        state.modal.error = error.message;
+      } finally {
+        if (routeFromHash() === "/admin") render();
+      }
+    }
+
+    function validateImage(file) {
+      const validTypes = ["image/png", "image/jpeg", "image/webp"];
+      if (!validTypes.includes(file.type)) throw new Error("Escolha um arquivo PNG, JPG, JPEG ou WEBP.");
+      if (file.size > MAX_IMAGE_BYTES) throw new Error("A imagem deve ter no máximo 5 MB.");
+    }
+
+    async function compressImage(file) {
+      if (file.size <= MAX_COMPRESSED_BYTES) return file;
+      if (!("createImageBitmap" in window) || !("toBlob" in HTMLCanvasElement.prototype)) return file;
+
+      const bitmap = await createImageBitmap(file);
+      try {
+        const scale = Math.min(1, MAX_IMAGE_DIMENSION / Math.max(bitmap.width, bitmap.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+        canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+        const context = canvas.getContext("2d");
+        if (!context) throw new Error("Não foi possível processar a imagem neste navegador.");
+        context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+
+        const mime = file.type === "image/png" ? "image/png" : file.type === "image/webp" ? "image/webp" : "image/jpeg";
+        let quality = 0.86;
+        let blob = await new Promise((resolve) => canvas.toBlob(resolve, mime, quality));
+        while (blob && blob.size > MAX_COMPRESSED_BYTES && mime !== "image/png" && quality > 0.45) {
+          quality -= 0.12;
+          blob = await new Promise((resolve) => canvas.toBlob(resolve, mime, quality));
+        }
+        if (!blob) throw new Error("Não foi possível comprimir a imagem.");
+        return new File([blob], file.name, { type: blob.type, lastModified: Date.now() });
+      } finally {
+        bitmap.close();
+      }
+    }
+
+    async function uploadProduct() {
+      if (!state.selectedFile) return;
+      state.adminBusy = true;
+      state.adminError = "";
+      state.adminMessage = "";
+      render();
+      try {
+        const file = await compressImage(state.selectedFile);
+        const body = new FormData();
+        body.append("imagem", file);
+        const data = await apiRequest("/produtos", { method: "POST", body });
+        clearPreview();
+        state.selectedFile = null;
+        state.modal = {
+          type: "upload-result",
+          title: "Sucesso",
+          message: `Gravata #${data.dados.id} adicionada com sucesso.`
+        };
+        await loadAdminProducts();
+      } catch (error) {
+        if (error.status === 401) {
+          logout(false);
+          return;
+        }
+        state.modal = {
+          type: "upload-result",
+          title: "Falha ao adicionar",
+          message: error.message || "Não foi possível comprimir ou enviar a imagem."
+        };
+      } finally {
+        state.adminBusy = false;
+        if (routeFromHash() === "/admin") render();
+      }
+    }
+
+    function clearPreview() {
+      if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
+      state.previewUrl = "";
+    }
+
+    app.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse" || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+      const imageArea = event.target.closest(".product-image");
+      const image = imageArea?.querySelector(":scope > img");
+      if (!image) return;
+
+      const bounds = imageArea.getBoundingClientRect();
+      const lensSize = Math.min(136, bounds.width * 0.72, bounds.height * 0.72);
+      const radius = lensSize / 2;
+      const zoom = 2.4;
+      const x = Math.max(radius, Math.min(bounds.width - radius, event.clientX - bounds.left));
+      const y = Math.max(radius, Math.min(bounds.height - radius, event.clientY - bounds.top));
+      let lens = imageArea.querySelector(".zoom-lens");
+      if (!lens) {
+        lens = document.createElement("span");
+        lens.className = "zoom-lens is-visible";
+        lens.setAttribute("aria-hidden", "true");
+        const magnifiedImage = image.cloneNode();
+        magnifiedImage.removeAttribute("loading");
+        magnifiedImage.alt = "";
+        lens.append(magnifiedImage);
+        imageArea.append(lens);
+      }
+
+      lens.style.width = `${lensSize}px`;
+      lens.style.height = `${lensSize}px`;
+      lens.style.left = `${x - radius}px`;
+      lens.style.top = `${y - radius}px`;
+      const magnifiedImage = lens.querySelector("img");
+      magnifiedImage.style.width = `${bounds.width * zoom}px`;
+      magnifiedImage.style.height = `${bounds.height * zoom}px`;
+      magnifiedImage.style.left = `${radius - x * zoom}px`;
+      magnifiedImage.style.top = `${radius - y * zoom}px`;
+    });
+
+    app.addEventListener("pointerleave", (event) => {
+      event.target.closest?.(".product-image")?.querySelector(".zoom-lens")?.remove();
+    }, true);
+
+    app.addEventListener("click", async (event) => {
+      const actionElement = event.target.closest("[data-action]");
+      if (actionElement) {
+        const action = actionElement.dataset.action;
+        const id = Number(actionElement.dataset.id);
+        if (action === "add-cart") addToCart(id);
+        else if (action === "scroll-collection") app.querySelector("#colecao")?.scrollIntoView({ behavior: "smooth" });
+        else if (action === "remove-cart") removeFromCart(id);
+        else if (action === "checkout") {
+          state.modal = {
+            type: "checkout",
+            nome: "",
+            telefone: "",
+            cep: "",
+            numero: "",
+            complemento: "",
+            endereco: null,
+            cepLoading: false,
+            cepError: "",
+            error: "",
+            busy: false
+          };
+          render();
+        } else if (action === "close-modal") {
+          state.modal = null;
+          render();
+        } else if (action === "admin-section") {
+          state.adminSection = actionElement.dataset.section;
+          state.adminMessage = "";
+          state.adminError = "";
+          render();
+          if (state.adminSection === "produtos" && !state.adminProducts.length) await loadAdminProducts();
+        } else if (action === "logout") logout();
+        else if (action === "change-status") openStatusModal(id);
+        else if (action === "delete-product") {
+          const product = state.adminProducts.find((item) => item.id === id);
+          if (product) {
+            state.modal = { type: "delete-product", product, busy: false, error: "" };
+            render();
+          }
+        }
+        else if (action === "apply-status") {
+          const { product } = state.modal;
+          const selected = app.querySelector("#new-status")?.value;
+          const original = product.status;
+          if (selected === original) delete state.pendingStatuses[product.id];
+          else state.pendingStatuses[product.id] = selected;
+          state.modal = null;
+          state.adminMessage = "";
+          render();
+        } else if (action === "confirm-delete") {
+          await deleteProduct();
+        } else if (action === "save-statuses") await saveStatuses();
+      }
+
+      if (event.target.matches("[data-backdrop]")) {
+        const closeable = !state.modal?.busy && state.modal?.type !== "login";
+        if (closeable) {
+          state.modal = null;
+          render();
+        }
+      }
+    });
+
+    app.addEventListener("input", (event) => {
+      if (event.target.id === "admin-product-search") {
+        state.adminProductSearch = event.target.value;
+        applyAdminProductFilters();
+      }
+      if (event.target.name === "telefone") {
+        const start = event.target.selectionStart;
+        const oldLength = event.target.value.length;
+        event.target.value = formatPhone(event.target.value);
+        const next = Math.max(0, start + event.target.value.length - oldLength);
+        event.target.setSelectionRange(next, next);
+        if (state.modal?.type === "checkout") state.modal.telefone = event.target.value;
+      }
+      if (event.target.name === "nome" && state.modal?.type === "checkout") {
+        state.modal.nome = event.target.value;
+      }
+      if (event.target.name === "numero" && state.modal?.type === "checkout") {
+        state.modal.numero = event.target.value;
+      }
+      if (event.target.name === "cep" && state.modal?.type === "checkout") {
+        const digits = event.target.value.replace(/\D/g, "").slice(0, 8);
+        event.target.value = digits.length > 5 ? `${digits.slice(0, 5)}-${digits.slice(5)}` : digits;
+        state.modal.cep = event.target.value;
+        state.modal.endereco = null;
+        state.modal.cepLoading = false;
+        state.modal.cepError = "";
+        state.modal.error = "";
+        state.modal.cepRequestId = (state.modal.cepRequestId || 0) + 1;
+        const message = app.querySelector("#cep-message");
+        const submitButton = app.querySelector("#checkout-form button[type='submit'], #checkout-form button:not([type])");
+        if (message) {
+          message.className = "";
+          message.setAttribute("role", "status");
+          message.textContent = digits.length === 8 ? "Consultando CEP…" : "Informe o CEP para preencher o endereço.";
+        }
+        for (const field of ["logradouro", "bairro", "cidade", "uf"]) {
+          const input = app.querySelector(`[name="${field}"]`);
+          if (input) input.value = "";
+        }
+        if (submitButton) submitButton.disabled = true;
+        if (digits.length === 8) consultarCep(digits);
+      }
+      if (event.target.name === "complemento" && state.modal?.type === "checkout") {
+        state.modal.complemento = event.target.value;
+      }
+      if (state.modal?.type === "checkout") atualizarBotaoCheckout();
+    });
+
+    app.addEventListener("change", (event) => {
+      if (event.target.matches("[data-status-filter]")) {
+        state.adminStatusFilters[event.target.dataset.statusFilter] = event.target.checked;
+        applyAdminProductFilters();
+      }
+      if (event.target.id === "new-status" && state.modal?.type === "status") {
+        state.modal.selected = event.target.value;
+      }
+      if (event.target.matches('input[name="imagem"]')) {
+        clearPreview();
+        state.selectedFile = event.target.files?.[0] || null;
+        state.adminError = "";
+        state.adminMessage = "";
+        if (!state.selectedFile) {
+          render();
+          return;
+        }
+        try {
+          validateImage(state.selectedFile);
+          state.previewUrl = URL.createObjectURL(state.selectedFile);
+        } catch (error) {
+          state.selectedFile = null;
+          state.adminError = error.message;
+        }
+        render();
+      }
+    });
+
+    app.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (event.target.id === "checkout-form") await submitCheckout(event.target);
+      if (event.target.id === "login-form") {
+        const form = new FormData(event.target);
+        const email = String(form.get("email") || "").trim();
+        const senha = String(form.get("senha") || "");
+        state.modal = { type: "login", email, busy: true, error: "" };
+        render();
+        try {
+          const data = await apiRequest("/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, senha })
+          });
+          writeToken(data.dados.token);
+          state.adminCheckedToken = readToken();
+          state.adminAuthenticated = true;
+          state.adminChecking = false;
+          state.adminSection = "produtos";
+          state.pendingStatuses = {};
+          state.adminMessage = "";
+          state.modal = { type: "welcome" };
+          render();
+          await loadAdminProducts();
+        } catch (error) {
+          state.modal = { type: "login", email, busy: false, error: error.message };
+          render();
+        }
+      }
+      if (event.target.id === "upload-form") await uploadProduct();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && state.modal
+        && state.modal.type !== "login" && !state.modal.busy) {
+        state.modal = null;
+        render();
+      }
+    });
+
+    window.addEventListener("hashchange", openRoute);
+    window.addEventListener("beforeunload", (event) => {
+      if (state.route === "/admin" && Object.keys(state.pendingStatuses).length) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    });
+
+    render();
+    if (state.route === "/") loadStoreProducts();
+  </script>
+</body>
+</html>
