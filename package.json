@@ -1,0 +1,7 @@
+{
+  "name": "meternal-legacy",
+  "private": true,
+  "scripts": {
+    "start": "npx serve . -s"
+  }
+}
